@@ -27,3 +27,5 @@ This project is developed using C# and Windows Presentation Foundation (WPF), in
 ## Usage
 Navigate through the application's UI to perform various database operations. The interface is intuitive, allowing for easy management of data entries through the implemented CRUD functionalities.
 
+##TODO
+Continuar
