@@ -16,7 +16,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         private string Email { get; set; }
         private string OfficeCode { get; set; }
 
-        // TODO : Foreign Key que apunta a SalesRepEmployeeNumber junto a EmployeeNumber
+        // TODO : Foreign Key que apunta a SalesRepEmployeeNumber de la TABLE Suctomers junto a EmployeeNumber
         // private int ReportTo { get; set; }
         private string JobTitle { get; set; }
     }
