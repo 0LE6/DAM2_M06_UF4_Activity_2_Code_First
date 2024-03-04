@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
 {
+    // TABLE Customers
     public class Customer
     {
         private int CustomerNumber {  get; set; }
