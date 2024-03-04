@@ -19,7 +19,9 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         private string PostalCode { get; set; }
         private string Country { get; set; }
 
-
+        // TODO : foreign keys
+        // private int? SalesRepEmployeeNumber { get; set; }
+        // private double CreditLimit { get; set; }
 
     }
 }
