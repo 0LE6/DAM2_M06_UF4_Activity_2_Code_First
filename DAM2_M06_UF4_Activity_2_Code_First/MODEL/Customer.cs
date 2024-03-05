@@ -9,16 +9,16 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
     // TABLE Customers
     public class Customer
     {
-        private int CustomerNumber {  get; set; }
-        private string CustomerName { get; set; }
-        private string ContactLastName { get; set; }
-        private string ContactFirstName { get; set; }
-        private string Phone {  get; set; }
-        private string AdressLine1 { get; set; }
-        private string AdressLine2 { get; set; }
-        private string State { get; set; }
-        private string PostalCode { get; set; }
-        private string Country { get; set; }
+        public int CustomerNumber {  get; set; }
+        public string CustomerName { get; set; }
+        public string ContactLastName { get; set; }
+        public string ContactFirstName { get; set; }
+        public string Phone {  get; set; }
+        public string AdressLine1 { get; set; }
+        public string AdressLine2 { get; set; }
+        public string State { get; set; }
+        public string PostalCode { get; set; }
+        public string Country { get; set; }
 
         // TODO : foreign keys
         // private int? SalesRepEmployeeNumber { get; set; }

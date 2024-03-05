@@ -12,13 +12,13 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         // TODO : Foreign Key que apunta a OfficeCode de la TABLE Employees
         // private string OfficeCode { get; set; }
 
-        private string City {  get; set; }
-        private string Phone { get; set; }
-        private string AddressLine1 { get; set; }
-        private string AddressLine2 { get; set; }
-        private string State { get; set; }
-        private string Country { get; set; }
-        private string PostalCode { get; set; }
-        private string Territory { get; set; }
+        public string City {  get; set; }
+        public string Phone { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string State { get; set; }
+        public string Country { get; set; }
+        public string PostalCode { get; set; }
+        public string Territory { get; set; }
     }
 }

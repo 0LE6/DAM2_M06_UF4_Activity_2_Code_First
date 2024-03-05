@@ -13,8 +13,8 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         // TODO : Foreign Key que apunta a CustomerNumeber en la TABEL Customers
         //private int CustomerNumber { get; set; }
 
-        private string CheckNumber {  get; set; }
-        private DateTime Date { get; set; }
-        private double Amount { get; set; }
+        public string CheckNumber {  get; set; }
+        public DateTime Date { get; set; }
+        public decimal Amount { get; set; }
     }
 }
