@@ -8,6 +8,10 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
 {
     public class ProductLines
     {
+        public ProductLines()
+        {
+            Products = new HashSet<Product>();
+        }
         public string ProductLine { get; set; }
         public string TextDescription { get; set; }
         public string HtmlDescription { get; set; }
