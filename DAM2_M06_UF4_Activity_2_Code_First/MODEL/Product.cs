@@ -13,10 +13,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         [Key]
         public string ProductCode { get; set; }
         public string ProductName { get; set; }
-
-        [ForeignKey("ProductLine")]
         public ProductLines ProductLine { get; set; }
-
         public string ProductScale { get; set; }
         public string ProductVendor { get; set; }
         public string ProductDescription { get; set; }
