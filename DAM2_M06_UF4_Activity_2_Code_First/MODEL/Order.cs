@@ -16,11 +16,11 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         public DateTime ShippedDate { get; set; }
         public string Status { get; set; }
         public string Comments { get; set; }
-        public int CustomerNumber { get; set; }
-        public int EmployeeNumber { get; set; }
+       // public int CustomerNumber { get; set; }
+        //public int EmployeeNumber { get; set; }
 
         public  Customer Customer { get; set; }
-        public  Employee Employee { get; set; }
+        //public  Employee Employee { get; set; }
         public  ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

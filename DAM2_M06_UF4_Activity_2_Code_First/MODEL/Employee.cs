@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
 {
     // TABLE Employees
+    [Table("EMPLOYEES")]
     public class Employee
     {
         public Employee()

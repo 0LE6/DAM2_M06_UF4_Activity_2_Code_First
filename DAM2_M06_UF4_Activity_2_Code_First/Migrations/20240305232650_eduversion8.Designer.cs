@@ -3,14 +3,16 @@ using System;
 using DAM2_M06_UF4_Activity_2_Code_First.MODEL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 {
     [DbContext(typeof(ClassicModelDbContext))]
-    partial class ClassicModelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240305232650_eduversion8")]
+    partial class eduversion8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,6 +49,9 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int?>("EmployeeNumber")
+                        .HasColumnType("int");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -61,7 +66,44 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 
                     b.HasKey("CustomerNumber");
 
+                    b.HasIndex("EmployeeNumber");
+
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Employee", b =>
+                {
+                    b.Property<int>("EmployeeNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Extension")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("JobTitle")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("OfficeCode")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("EmployeeNumber");
+
+                    b.ToTable("Employee");
                 });
 
             modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Order", b =>
@@ -75,6 +117,9 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("CustomerNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeNumber")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("OrderDate")
@@ -93,6 +138,8 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                     b.HasKey("OrderNumber");
 
                     b.HasIndex("CustomerNumber");
+
+                    b.HasIndex("EmployeeNumber");
 
                     b.ToTable("Order");
                 });
@@ -197,11 +244,24 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                     b.ToTable("ProductLines");
                 });
 
+            modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Customer", b =>
+                {
+                    b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Employee", null)
+                        .WithMany("Customers")
+                        .HasForeignKey("EmployeeNumber");
+                });
+
             modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Order", b =>
                 {
                     b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerNumber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
