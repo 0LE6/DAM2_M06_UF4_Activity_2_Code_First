@@ -19,5 +19,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
                     "Server=localhost;Database=0classicmodel;Uid=root;Pwd=\"\"");
             }
         }
+
+        public virtual DbSet<Product> Products { get; set; }
     }
 }
