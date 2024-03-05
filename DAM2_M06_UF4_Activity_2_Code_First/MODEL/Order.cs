@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
 {
     public class Order
     {
+        [Key]
         public int OrderNumber { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime RequiredDate { get; set; }
