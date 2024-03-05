@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 {
     [DbContext(typeof(ClassicModelDbContext))]
-    [Migration("20240305231527_eduversion5")]
-    partial class eduversion5
+    [Migration("20240305235213_version4")]
+    partial class version4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -103,7 +103,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 
                     b.HasKey("EmployeeNumber");
 
-                    b.ToTable("Employee");
+                    b.ToTable("EMPLOYEES");
                 });
 
             modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Order", b =>
@@ -117,15 +117,6 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("CustomerNumber")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CustomerNumber1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmployeeNumber")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmployeeNumber1")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("OrderDate")
@@ -143,9 +134,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 
                     b.HasKey("OrderNumber");
 
-                    b.HasIndex("CustomerNumber1");
-
-                    b.HasIndex("EmployeeNumber1");
+                    b.HasIndex("CustomerNumber");
 
                     b.ToTable("Order");
                 });
@@ -203,8 +192,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("ProductLine1")
-                        .IsRequired()
+                    b.Property<string>("ProductLines")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<string>("ProductName")
@@ -224,14 +212,14 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 
                     b.HasKey("ProductCode");
 
-                    b.HasIndex("ProductLine1");
+                    b.HasIndex("ProductLines");
 
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.ProductLines", b =>
+            modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.ProductLine", b =>
                 {
-                    b.Property<string>("ProductLine")
+                    b.Property<string>("ProductLines")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<string>("HtmlDescription")
@@ -246,7 +234,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("ProductLine");
+                    b.HasKey("ProductLines");
 
                     b.ToTable("ProductLines");
                 });
@@ -262,13 +250,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                 {
                     b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerNumber1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeNumber1")
+                        .HasForeignKey("CustomerNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -290,11 +272,9 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 
             modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Product", b =>
                 {
-                    b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.ProductLines", "ProductLine")
+                    b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.ProductLine", null)
                         .WithMany("Products")
-                        .HasForeignKey("ProductLine1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductLines");
                 });
 #pragma warning restore 612, 618
         }
