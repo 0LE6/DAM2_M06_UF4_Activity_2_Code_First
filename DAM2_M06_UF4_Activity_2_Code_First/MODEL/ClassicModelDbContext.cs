@@ -22,5 +22,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         }
 
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductLines> ProductLines { get; set; }
+
     }
 }

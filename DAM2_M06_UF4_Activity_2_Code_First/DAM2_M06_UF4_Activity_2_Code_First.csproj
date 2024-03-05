@@ -11,6 +11,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20240305213246_versionempty.cs" />
     <Compile Remove="Migrations\20240305213246_versionempty.Designer.cs" />
+    <Compile Remove="Migrations\20240305220623_version3Test.cs" />
+    <Compile Remove="Migrations\20240305220623_version3Test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
