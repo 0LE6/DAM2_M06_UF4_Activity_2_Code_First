@@ -10,7 +10,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
     {
         public string ProductCode { get; set; }
         public string ProductName { get; set; }
-        public ProductLines ProductLine { get; set; }
+        //public ProductLines ProductLine { get; set; }
         public string ProductScale { get; set; }
         public string ProductVendor { get; set; }
         public string ProductDescription { get; set; }
@@ -18,6 +18,6 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         public decimal BuyPrice { get; set; }
         public decimal MSRP { get; set; }
 
-        public  ICollection<OrderDetail> OrderDetails { get; set; }
+        //public  ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }
