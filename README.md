@@ -28,4 +28,7 @@ This project is developed using C# and Windows Presentation Foundation (WPF), in
 Navigate through the application's UI to perform various database operations. The interface is intuitive, allowing for easy management of data entries through the implemented CRUD functionalities.
 
 ##TODO
-Continuar
+Comprovar si ya existe un objeto antes de añadirlo
+Ajustar nulleables por toda la tabla (imagen, html description .. en caso de las Product Lines)
+Interficie del DAOManager
+
