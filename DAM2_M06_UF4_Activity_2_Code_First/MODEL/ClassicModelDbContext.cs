@@ -21,11 +21,26 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
             }
         }
 
+        //Composite key per Payments
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Payment>().HasKey(o => new { o.CheckNumber, o.CustomerNumber });
+        }
+
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductLine> ProductLines { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; } 
-        
+        public virtual DbSet<Customer> Customers { get; set; }
+        //public virtual DbSet<Order> Orders { get; set; }
+
+        //public virtual DbSet<Employee> Employees { get; set; }
+        // public virtual DbSet<Office> Offices { get; set; }
+
+        //public virtual DbSet<Payment> Payments { get; set; }
+
+
+
+
 
     }
 }

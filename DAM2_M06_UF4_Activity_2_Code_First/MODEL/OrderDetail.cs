@@ -12,13 +12,13 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
     {
         [Key]
         public int OrderLineNumber { get; set; }
-        public int OrderNumber { get; set; }
-        public string ProductCode { get; set; }
+        //public int OrderNumber { get; set; }
+        //public string ProductCode { get; set; }
         public int QuantityOrdered { get; set; }
         public decimal PriceEach { get; set; }
-        public decimal OrderLineAmount { get; set; }
+        //public decimal OrderLineAmount { get; set; } this was a mistake
 
-        public  Order Order { get; set; }
-        public  Product Product { get; set; }
+        //vpublic  Order Order { get; set; }
+       // public  Product Product { get; set; }
     }
 }

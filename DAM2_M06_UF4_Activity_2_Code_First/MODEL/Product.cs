@@ -20,6 +20,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         public int QuantityInStock { get; set; }
         public decimal BuyPrice { get; set; }
         public decimal MSRP { get; set; }
-        //public  ICollection<OrderDetail> OrderDetails { get; set; }
+
+        public  ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

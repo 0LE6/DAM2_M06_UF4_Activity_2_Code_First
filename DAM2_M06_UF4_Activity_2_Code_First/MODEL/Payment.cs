@@ -13,6 +13,9 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         // TODO : Foreign Key que apunta a CustomerNumeber en la TABEL Customers
         //private int CustomerNumber { get; set; }
 
+        //Cal fer una composite key entre Customer Number i Check Number.
+       
+        public int CustomerNumber { get; set; }
         public string CheckNumber {  get; set; }
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }
