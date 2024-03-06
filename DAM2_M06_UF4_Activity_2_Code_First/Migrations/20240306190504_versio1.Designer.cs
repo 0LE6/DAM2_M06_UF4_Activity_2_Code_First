@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 {
     [DbContext(typeof(ClassicModelDbContext))]
-    [Migration("20240306175516_version1")]
-    partial class version1
+    [Migration("20240306190504_versio1")]
+    partial class versio1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,6 +54,9 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
+
+                    b.Property<decimal>("CreditLimit")
+                        .HasColumnType("decimal(10, 2)");
 
                     b.Property<string>("CustomerName")
                         .IsRequired()
@@ -106,6 +109,11 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
 
+                    b.Property<string>("JobTitle")
+                        .IsRequired()
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
@@ -113,19 +121,15 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 
                     b.Property<string>("OfficeCode")
                         .IsRequired()
-                        .HasColumnType("varchar(10) CHARACTER SET utf8mb4")
-                        .HasMaxLength(10);
-
-                    b.Property<string>("OfficeCode1")
-                        .IsRequired()
                         .HasColumnType("varchar(10) CHARACTER SET utf8mb4");
 
                     b.Property<int?>("ReportsTo")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasMaxLength(10);
 
                     b.HasKey("EmployeeNumber");
 
-                    b.HasIndex("OfficeCode1");
+                    b.HasIndex("OfficeCode");
 
                     b.HasIndex("ReportsTo");
 
@@ -196,9 +200,6 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                     b.Property<int>("CustomerNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("CustomerNumber1")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime(6)");
 
@@ -215,7 +216,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 
                     b.HasKey("OrderNumber");
 
-                    b.HasIndex("CustomerNumber1");
+                    b.HasIndex("CustomerNumber");
 
                     b.ToTable("Orders");
                 });
@@ -347,7 +348,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                 {
                     b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Office", "Office")
                         .WithMany("Employees")
-                        .HasForeignKey("OfficeCode1")
+                        .HasForeignKey("OfficeCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -361,7 +362,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                 {
                     b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerNumber1")
+                        .HasForeignKey("CustomerNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

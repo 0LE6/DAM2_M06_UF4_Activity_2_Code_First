@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 {
-    public partial class version1 : Migration
+    public partial class versio1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,16 +51,16 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
                     Extension = table.Column<string>(maxLength: 10, nullable: false),
                     Email = table.Column<string>(maxLength: 100, nullable: false),
-                    OfficeCode = table.Column<string>(maxLength: 10, nullable: false),
-                    ReportsTo = table.Column<int>(nullable: true),
-                    OfficeCode1 = table.Column<string>(nullable: false)
+                    ReportsTo = table.Column<int>(maxLength: 10, nullable: true),
+                    OfficeCode = table.Column<string>(nullable: false),
+                    JobTitle = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Employees", x => x.EmployeeNumber);
                     table.ForeignKey(
-                        name: "FK_Employees_Offices_OfficeCode1",
-                        column: x => x.OfficeCode1,
+                        name: "FK_Employees_Offices_OfficeCode",
+                        column: x => x.OfficeCode,
                         principalTable: "Offices",
                         principalColumn: "OfficeCode",
                         onDelete: ReferentialAction.Cascade);
@@ -113,7 +113,8 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                     State = table.Column<string>(maxLength: 50, nullable: false),
                     PostalCode = table.Column<string>(maxLength: 15, nullable: false),
                     Country = table.Column<string>(maxLength: 50, nullable: false),
-                    SalesRepEmployeeNumber = table.Column<int>(nullable: false)
+                    SalesRepEmployeeNumber = table.Column<int>(nullable: false),
+                    CreditLimit = table.Column<decimal>(type: "decimal(10, 2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -137,15 +138,14 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                     ShippedDate = table.Column<DateTime>(nullable: true),
                     Status = table.Column<string>(maxLength: 15, nullable: false),
                     Comments = table.Column<string>(nullable: false),
-                    CustomerNumber = table.Column<int>(nullable: false),
-                    CustomerNumber1 = table.Column<int>(nullable: false)
+                    CustomerNumber = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.OrderNumber);
                     table.ForeignKey(
-                        name: "FK_Orders_Customers_CustomerNumber1",
-                        column: x => x.CustomerNumber1,
+                        name: "FK_Orders_Customers_CustomerNumber",
+                        column: x => x.CustomerNumber,
                         principalTable: "Customers",
                         principalColumn: "CustomerNumber",
                         onDelete: ReferentialAction.Cascade);
@@ -204,9 +204,9 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                 column: "SalesRepEmployeeNumber");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employees_OfficeCode1",
+                name: "IX_Employees_OfficeCode",
                 table: "Employees",
-                column: "OfficeCode1");
+                column: "OfficeCode");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_ReportsTo",
@@ -219,9 +219,9 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                 column: "ProductCode");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_CustomerNumber1",
+                name: "IX_Orders_CustomerNumber",
                 table: "Orders",
-                column: "CustomerNumber1");
+                column: "CustomerNumber");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_ProductLine",

@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using DAM2_M06_UF4_Activity_2_Code_First.DAO;
+using DAM2_M06_UF4_Activity_2_Code_First.MODEL;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +21,11 @@ namespace DAM2_M06_UF4_Activity_2_Code_First
         public MainWindow()
         {
             InitializeComponent();
+
+            ClassicModelDbContext myContext = new ClassicModelDbContext();
+            DAOManager manager = new DAOManager(myContext);
+
+            manager.LoadDatabase();
         }
     }
 }
