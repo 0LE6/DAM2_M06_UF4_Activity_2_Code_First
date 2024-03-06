@@ -22,15 +22,24 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
         }
         public void LoadDatabase() // Recordatorio que esto petará si no está vacía (duplicado de registros) 
         {
-            LoadProductLines();
-            LoadProducts();
-            LoadOffices();
-            LoadEmployees();
-            LoadCustomers();
-            LoadPayments();
-            LoadOrders();
-            LoadOrderDetails();
+            try // D'aquesta manera si peta un .. no es fan els demés, però bueno. Caldria veure què es demana.
+            {
+                LoadProductLines();
+                LoadProducts();
+                LoadOffices();
+                LoadEmployees();
+                LoadCustomers();
+                LoadPayments();
+                LoadOrders();
+                LoadOrderDetails();
+            }
+            catch (Exception e)
+            {
+
+            }
         }
+
+        #region LoadSpam
         private void LoadProductLines()
         {
 
@@ -55,14 +64,13 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
                     AddProductLine(p);
                 }
             }
-            
+
         }
         private void AddProductLine(ProductLine p)
         {
-           dbContext.ProductLines.Add(p);
-           dbContext.SaveChanges();
+            dbContext.ProductLines.Add(p);
+            dbContext.SaveChanges();
         }
-        #region LoadSpam
         private void LoadProducts() {
             // "productCode","productName","productLine","productScale","productVendor","productDescription","quantityInStock","buyPrice","MSRP"
             CultureInfo culture = CultureInfo.InvariantCulture;
