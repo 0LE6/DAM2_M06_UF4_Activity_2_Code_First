@@ -32,8 +32,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<OrderDetail>()
-            //    .HasKey(od => new { od.OrderNumber, od.ProductCode });
+            // empleamos el API fluent para configurar ciertos aspectos del método
 
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.ProductLineDetails)
@@ -41,23 +40,8 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
                 .HasForeignKey(p => p.ProductLine)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Employee>()
-                .HasMany(e => e.Subordinates)
-                .WithOne(s => s.Manager)
-                .HasForeignKey(s => s.ReportsTo)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Customer>()
-                .HasOne(c => c.SalesRep)
-                .WithMany(e => e.Customers)
-                .HasForeignKey(c => c.SalesRepEmployeeNumber)
-                .OnDelete(DeleteBehavior.Restrict);
-
             modelBuilder.Entity<OrderDetail>()
-                .HasKey(od => new { od.OrderNumber, od.ProductCode });
-
-            modelBuilder.Entity<Payment>()
-                .HasKey(p => new { p.CustomerNumber, p.CheckNumber });
+               .HasKey(od => new { od.OrderNumber, od.ProductCode });
 
             // Configurar la relación entre Orders y Customers correctamente
             modelBuilder.Entity<Order>()
@@ -66,6 +50,18 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
                 .HasForeignKey(o => o.CustomerNumber)
                 .OnDelete(DeleteBehavior.Cascade); // o .Restrict dependiendo de las reglas de negocio
 
+            modelBuilder.Entity<Customer>()
+                .HasOne(c => c.SalesRep)
+                .WithMany(e => e.Customers)
+                .HasForeignKey(c => c.SalesRepEmployeeNumber)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Employee>()
+                .HasMany(e => e.Subordinates)
+                .WithOne(s => s.Manager)
+                .HasForeignKey(s => s.ReportsTo)
+                .OnDelete(DeleteBehavior.Restrict);
+
             // Asegurarse de que el campo OfficeCode en Employees esté mapeado correctamente
             modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Office)
@@ -73,7 +69,8 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
                 .HasForeignKey(e => e.OfficeCode)
                 .OnDelete(DeleteBehavior.Cascade); // o .Restrict dependiendo de las reglas de negocio
 
-
+            modelBuilder.Entity<Payment>()
+                .HasKey(p => new { p.CustomerNumber, p.CheckNumber });
         }
     }
 }

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 {
     [DbContext(typeof(ClassicModelDbContext))]
-    [Migration("20240306190504_versio1")]
-    partial class versio1
+    [Migration("20240306211758_versionOficial_3")]
+    partial class versionOficial_3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,7 +73,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                         .HasColumnType("varchar(15) CHARACTER SET utf8mb4")
                         .HasMaxLength(15);
 
-                    b.Property<int>("SalesRepEmployeeNumber")
+                    b.Property<int?>("SalesRepEmployeeNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("State")
@@ -121,7 +121,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 
                     b.Property<string>("OfficeCode")
                         .IsRequired()
-                        .HasColumnType("varchar(10) CHARACTER SET utf8mb4");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int?>("ReportsTo")
                         .HasColumnType("int")
@@ -129,62 +129,9 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 
                     b.HasKey("EmployeeNumber");
 
-                    b.HasIndex("OfficeCode");
-
                     b.HasIndex("ReportsTo");
 
                     b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Office", b =>
-                {
-                    b.Property<string>("OfficeCode")
-                        .HasColumnType("varchar(10) CHARACTER SET utf8mb4")
-                        .HasMaxLength(10);
-
-                    b.Property<string>("AddressLine1")
-                        .IsRequired()
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("AddressLine2")
-                        .IsRequired()
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("varchar(15) CHARACTER SET utf8mb4")
-                        .HasMaxLength(15);
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Territory")
-                        .IsRequired()
-                        .HasColumnType("varchar(10) CHARACTER SET utf8mb4")
-                        .HasMaxLength(10);
-
-                    b.HasKey("OfficeCode");
-
-                    b.ToTable("Offices");
                 });
 
             modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Order", b =>
@@ -243,26 +190,6 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                     b.HasIndex("ProductCode");
 
                     b.ToTable("OrderDetails");
-                });
-
-            modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Payment", b =>
-                {
-                    b.Property<int>("CustomerNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CheckNumber")
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(10, 2)");
-
-                    b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("CustomerNumber", "CheckNumber");
-
-                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Product", b =>
@@ -340,18 +267,11 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                     b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Employee", "SalesRep")
                         .WithMany("Customers")
                         .HasForeignKey("SalesRepEmployeeNumber")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Employee", b =>
                 {
-                    b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Office", "Office")
-                        .WithMany("Employees")
-                        .HasForeignKey("OfficeCode")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Employee", "Manager")
                         .WithMany("Subordinates")
                         .HasForeignKey("ReportsTo")
@@ -378,15 +298,6 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                     b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Product", "Product")
                         .WithMany("OrderDetails")
                         .HasForeignKey("ProductCode")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Payment", b =>
-                {
-                    b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Customer", "Customer")
-                        .WithMany("Payments")
-                        .HasForeignKey("CustomerNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

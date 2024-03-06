@@ -39,7 +39,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         public string PostalCode { get; set; }
         [StringLength(50)]
         public string Country { get; set; }
-        public int SalesRepEmployeeNumber { get; set; }
+        public int? SalesRepEmployeeNumber { get; set; }
 
         [Column(TypeName = "decimal(10, 2)")]
         public decimal CreditLimit { get; set; }
