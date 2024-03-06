@@ -3,14 +3,16 @@ using System;
 using DAM2_M06_UF4_Activity_2_Code_First.MODEL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 {
     [DbContext(typeof(ClassicModelDbContext))]
-    partial class ClassicModelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240306175516_version1")]
+    partial class version1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,9 +54,6 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
-
-                    b.Property<decimal>("CreditLimit")
-                        .HasColumnType("decimal(10, 2)");
 
                     b.Property<string>("CustomerName")
                         .IsRequired()
@@ -107,11 +106,6 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
 
-                    b.Property<string>("JobTitle")
-                        .IsRequired()
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
@@ -119,15 +113,19 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 
                     b.Property<string>("OfficeCode")
                         .IsRequired()
+                        .HasColumnType("varchar(10) CHARACTER SET utf8mb4")
+                        .HasMaxLength(10);
+
+                    b.Property<string>("OfficeCode1")
+                        .IsRequired()
                         .HasColumnType("varchar(10) CHARACTER SET utf8mb4");
 
                     b.Property<int?>("ReportsTo")
-                        .HasColumnType("int")
-                        .HasMaxLength(10);
+                        .HasColumnType("int");
 
                     b.HasKey("EmployeeNumber");
 
-                    b.HasIndex("OfficeCode");
+                    b.HasIndex("OfficeCode1");
 
                     b.HasIndex("ReportsTo");
 
@@ -198,6 +196,9 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                     b.Property<int>("CustomerNumber")
                         .HasColumnType("int");
 
+                    b.Property<int>("CustomerNumber1")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime(6)");
 
@@ -214,7 +215,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 
                     b.HasKey("OrderNumber");
 
-                    b.HasIndex("CustomerNumber");
+                    b.HasIndex("CustomerNumber1");
 
                     b.ToTable("Orders");
                 });
@@ -346,7 +347,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                 {
                     b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Office", "Office")
                         .WithMany("Employees")
-                        .HasForeignKey("OfficeCode")
+                        .HasForeignKey("OfficeCode1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -360,7 +361,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                 {
                     b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerNumber")
+                        .HasForeignKey("CustomerNumber1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

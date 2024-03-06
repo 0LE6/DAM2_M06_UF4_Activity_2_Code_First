@@ -3,14 +3,16 @@ using System;
 using DAM2_M06_UF4_Activity_2_Code_First.MODEL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 {
     [DbContext(typeof(ClassicModelDbContext))]
-    partial class ClassicModelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240306182511_version2")]
+    partial class version2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,11 +105,6 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                         .HasMaxLength(10);
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("JobTitle")
                         .IsRequired()
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
