@@ -26,6 +26,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First
             DAOManager manager = new DAOManager(myContext);
 
             manager.LoadDatabase();
+            
         }
     }
 }
