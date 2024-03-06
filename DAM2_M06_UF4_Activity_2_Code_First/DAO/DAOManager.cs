@@ -231,7 +231,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
                     c.State = state;
                     c.PostalCode = postalCode;
                     c.Country = country;
-                    if (salesRepEmployeeNumber == "NULL") c.SalesRepEmployeeNumber = 1002; // TODO: Esto debería de ser nulleable
+                    if (salesRepEmployeeNumber == "NULL") c.SalesRepEmployeeNumber = null;
                     else c.SalesRepEmployeeNumber = Convert.ToInt32(salesRepEmployeeNumber);
                     c.CreditLimit = Convert.ToDecimal(creditLimit);
 
