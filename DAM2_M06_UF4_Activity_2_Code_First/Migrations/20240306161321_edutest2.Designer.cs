@@ -3,14 +3,16 @@ using System;
 using DAM2_M06_UF4_Activity_2_Code_First.MODEL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 {
     [DbContext(typeof(ClassicModelDbContext))]
-    partial class ClassicModelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240306161321_edutest2")]
+    partial class edutest2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,9 +44,6 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                     b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<decimal>("CreditLimit")
-                        .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("CustomerName")
                         .IsRequired()
@@ -106,6 +105,9 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<decimal>("OrderLineAmount")
+                        .HasColumnType("decimal(65,30)");
+
                     b.Property<int?>("OrderNumber")
                         .HasColumnType("int");
 
@@ -125,25 +127,6 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                     b.HasIndex("ProductCode");
 
                     b.ToTable("OrderDetails");
-                });
-
-            modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Payment", b =>
-                {
-                    b.Property<string>("CheckNumber")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<int>("CustomerNumber")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("CheckNumber", "CustomerNumber");
-
-                    b.ToTable("Payment");
                 });
 
             modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Product", b =>

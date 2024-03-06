@@ -28,9 +28,9 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         public string PostalCode { get; set; }
         public string Country { get; set; }
 
-        [ForeignKey("SalesRepEmployeeNumber")]
-        private int? SalesRepEmployeeNumber { get; set; }
-        private decimal CreditLimit { get; set; }
+        //[ForeignKey("SalesRepEmployeeNumber")]
+        //public int? SalesRepEmployeeNumber { get; set; }
+        public decimal CreditLimit { get; set; }
 
         public ICollection<Order> Orders { get; set; }
 

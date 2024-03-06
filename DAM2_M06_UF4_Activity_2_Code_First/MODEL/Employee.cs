@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 
 namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
 {
-    // TABLE Employees
-    [Table("EMPLOYEES")]
+    //// TABLE Employees
+    //[Table("EMPLOYEES")]
     public class Employee
     {
         public Employee()
         {
             Customers = new HashSet<Customer>();
+            //Employees = new HashSet<Employee>();
         }
         [Key]
         public int EmployeeNumber {  get; set; }
@@ -25,7 +26,8 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         public string OfficeCode { get; set; }
 
         public ICollection<Customer> Customers { get; set; }
-        private int? ReportTo { get; set; }
+        //public ICollection<Employee> Employees { get; set; }
+        public int? ReportTo { get; set; }
         public string JobTitle { get; set; }
     }
 }

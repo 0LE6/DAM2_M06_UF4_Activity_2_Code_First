@@ -3,14 +3,16 @@ using System;
 using DAM2_M06_UF4_Activity_2_Code_First.MODEL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 {
     [DbContext(typeof(ClassicModelDbContext))]
-    partial class ClassicModelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240306161100_edutest1")]
+    partial class edutest1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,9 +44,6 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                     b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<decimal>("CreditLimit")
-                        .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("CustomerName")
                         .IsRequired()
@@ -106,13 +105,23 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrderNumber")
+                    b.Property<decimal>("OrderLineAmount")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<int>("OrderNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrderNumber1")
                         .HasColumnType("int");
 
                     b.Property<decimal>("PriceEach")
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("ProductCode")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("ProductCode1")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<int>("QuantityOrdered")
@@ -120,30 +129,11 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
 
                     b.HasKey("OrderLineNumber");
 
-                    b.HasIndex("OrderNumber");
+                    b.HasIndex("OrderNumber1");
 
-                    b.HasIndex("ProductCode");
+                    b.HasIndex("ProductCode1");
 
                     b.ToTable("OrderDetails");
-                });
-
-            modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Payment", b =>
-                {
-                    b.Property<string>("CheckNumber")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<int>("CustomerNumber")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("CheckNumber", "CustomerNumber");
-
-                    b.ToTable("Payment");
                 });
 
             modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Product", b =>
@@ -221,11 +211,11 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.Migrations
                 {
                     b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Order", null)
                         .WithMany("OrderDetails")
-                        .HasForeignKey("OrderNumber");
+                        .HasForeignKey("OrderNumber1");
 
                     b.HasOne("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Product", null)
                         .WithMany("OrderDetails")
-                        .HasForeignKey("ProductCode");
+                        .HasForeignKey("ProductCode1");
                 });
 
             modelBuilder.Entity("DAM2_M06_UF4_Activity_2_Code_First.MODEL.Product", b =>
