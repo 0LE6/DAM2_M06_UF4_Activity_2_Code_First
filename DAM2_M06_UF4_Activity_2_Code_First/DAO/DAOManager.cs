@@ -20,9 +20,10 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
         {
             dbContext = context;
         }
-        public void LoadDatabase()
+        public void LoadDatabase() // Recordatorio que esto petará si no está vacía (duplicado de registros) 
         {
             LoadProductLines();
+            LoadProducts();
         }
         private void LoadProductLines()
         {
@@ -55,5 +56,64 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
            dbContext.ProductLines.Add(p);
            dbContext.SaveChanges();
         }
+
+        private void LoadProducts() {
+            // "productCode","productName","productLine","productScale","productVendor","productDescription","quantityInStock","buyPrice","MSRP"
+            CultureInfo culture = CultureInfo.InvariantCulture;
+            using (var reader = new StreamReader("PRODUCTS.csv"))
+            using (var csv = new CsvReader(reader, culture))
+            {
+                csv.Read();
+                while (csv.Read())
+                {
+                    var productCode = csv.GetField(0);
+                    var productName = csv.GetField(1);
+                    var productLine = csv.GetField(2);
+                    var productScale = csv.GetField(3);
+                    var productVendor = csv.GetField(4);
+                    var productDescription = csv.GetField(5);
+                    var quantityInStock = csv.GetField(6);
+                    var buyPrice = csv.GetField(7);
+                    var MSRP = csv.GetField(8);
+
+                    int qty = Convert.ToInt32(quantityInStock);
+                    decimal price = Convert.ToDecimal(buyPrice);
+                    decimal msrp = Convert.ToDecimal(MSRP);
+
+
+                    Product p = new Product();
+                    p.ProductCode = productCode;
+                    p.ProductName = productName;
+                    p.ProductLine = productLine;
+                    p.ProductScale = productScale;
+                    p.ProductVendor = productVendor;
+                    p.ProductDescription = productDescription;
+                    p.QuantityInStock = qty;
+                    p.BuyPrice = price;
+                    p.MSRP = msrp;
+
+                    AddProduct(p);
+                }
+            }
+        }
+        private void AddProduct(Product p){
+            dbContext.Products.Add(p);
+            dbContext.SaveChanges();
+        }
+
+        private void LoadOffices() { }
+        private void AddOffice(Office o) { }
+
+        private void LoadEmployees() { }
+        private void AddEmployee(Employee e) { }
+        private void LoadCustomers() { }
+        private void AddCustomer(Customer c) { }
+        private void LoadPayments() { }
+        private void AddPayment(Payment p) { }
+
+        private void LoadOrders() { }
+        private void AddOrder(Order p) { }
+
+
     }
 }
