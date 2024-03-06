@@ -13,12 +13,15 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         {
             Products = new HashSet<Product>();
         }
+
         [Key]
-        public string ProductLines { get; set; }
+        [StringLength(50)]
+        public string ProductLineCode { get; set; }
+        [StringLength(4000)]
         public string TextDescription { get; set; }
         public string HtmlDescription { get; set; }
-        public string Image { get; set; } // set as string
+        public byte[] Image { get; set; }
 
-        public ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

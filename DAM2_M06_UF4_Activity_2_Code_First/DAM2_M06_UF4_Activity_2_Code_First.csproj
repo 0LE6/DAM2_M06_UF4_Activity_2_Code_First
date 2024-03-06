@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20240305213246_versionempty.Designer.cs" />
     <Compile Remove="Migrations\20240305220623_version3Test.cs" />
     <Compile Remove="Migrations\20240305220623_version3Test.Designer.cs" />
+    <Compile Remove="Migrations\20240305233449_eduversion11.cs" />
+    <Compile Remove="Migrations\20240305233449_eduversion11.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

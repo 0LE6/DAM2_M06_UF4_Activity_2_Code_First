@@ -14,25 +14,39 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         public Customer()
         {
             Orders = new HashSet<Order>();
-        }   
+            Payments = new HashSet<Payment>();
+        }
 
         [Key]
-        public int CustomerNumber {  get; set; }
+        public int CustomerNumber { get; set; }
+        [StringLength(50)]
         public string CustomerName { get; set; }
+        [StringLength(50)]
         public string ContactLastName { get; set; }
+        [StringLength(50)]
         public string ContactFirstName { get; set; }
-        public string Phone {  get; set; }
-        public string AdressLine1 { get; set; }
-        public string AdressLine2 { get; set; }
+        [StringLength(50)]
+        public string Phone { get; set; }
+        [StringLength(50)]
+        public string AddressLine1 { get; set; }
+        [StringLength(50)]
+        public string AddressLine2 { get; set; }
+        [StringLength(50)]
+        public string City { get; set; }
+        [StringLength(50)]
         public string State { get; set; }
+        [StringLength(15)]
         public string PostalCode { get; set; }
+        [StringLength(50)]
         public string Country { get; set; }
+        public int SalesRepEmployeeNumber { get; set; }
 
-        [ForeignKey("SalesRepEmployeeNumber")]
-        private int? SalesRepEmployeeNumber { get; set; }
-        private decimal CreditLimit { get; set; }
+        [Column(TypeName = "decimal(10, 2)")]
+        public decimal CreditLimit { get; set; }
 
-        public ICollection<Order> Orders { get; set; }
+        public virtual Employee SalesRep { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Payment> Payments { get; set; }
 
     }
 }
