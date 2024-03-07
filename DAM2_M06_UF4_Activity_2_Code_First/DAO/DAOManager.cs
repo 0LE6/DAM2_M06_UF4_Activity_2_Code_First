@@ -513,12 +513,53 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
                             .ToList();
         }
 
+        public List<MostSoldProductByOffice> GetMostSoldProductsByOffice()
+        {
+            var mostSoldProductsByOffice = dbContext.OrderDetails
+                .Include(od => od.Order)
+                    .ThenInclude(o => o.Customer)
+                        .ThenInclude(c => c.SalesRep)
+                            .ThenInclude(e => e.Office)
+                .Include(od => od.Product)
+                .GroupBy(od => new { od.Product.ProductName, od.Order.Customer.SalesRep.OfficeCode })
+                .Select(group => new
+                {
+                    OfficeCode = group.Key.OfficeCode,
+                    ProductName = group.Key.ProductName,
+                    TotalQuantity = group.Sum(g => g.QuantityOrdered),
+                    TotalSales = group.Sum(g => g.QuantityOrdered * g.PriceEach)
+                })
+                .OrderByDescending(g => g.OfficeCode).ThenByDescending(g => g.TotalSales)
+                .GroupBy(g => g.OfficeCode)
+                .Select(g => g.FirstOrDefault())
+                .ToList();
+
+            var formattedResults = mostSoldProductsByOffice
+                .Select(x => new MostSoldProductByOffice
+                {
+                    OfficeCode = x.OfficeCode,
+                    ProductName = x.ProductName,
+                    TotalQuantity = x.TotalQuantity,
+                    TotalSales = x.TotalSales
+                })
+                .ToList();
+
+            return formattedResults;
+        }
         #endregion
 
 
     }
 
     // Auxilar code
+
+    public class MostSoldProductByOffice
+    {
+        public string OfficeCode { get; set; }
+        public string ProductName { get; set; }
+        public int TotalQuantity { get; set; }
+        public decimal TotalSales { get; set; }
+    }
     public class EmployeeOfficeInfo
     {
         public int EmployeeNumber { get; set; }
