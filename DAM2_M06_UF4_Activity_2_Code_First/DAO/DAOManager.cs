@@ -593,5 +593,11 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
         public string OfficeCountry { get; set; }
     }
 
+    public class EmployeeSales
+    {
+        public Employee Employee { get; set; }
+        public decimal Sales { get; set; }
+    }
+
 
 }

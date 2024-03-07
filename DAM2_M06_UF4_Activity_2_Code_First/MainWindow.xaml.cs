@@ -157,10 +157,21 @@ namespace DAM2_M06_UF4_Activity_2_Code_First
                 decimal sumaVentes = 0;
                 foreach (Customer c in e.Customers)
                 {
-                   
+                    List<Payment> payments = manager.GetPaymentsByCustomerNumber(c.CustomerNumber);
+                    foreach (Payment payment in payments)
+                    {
+                        sumaVentes += payment.Amount;
+                    }
+
                 }
+                kvpEmployeesVendes.Add(e, sumaVentes);
             }
-            
+            List<EmployeeSales> employeeSalesList = kvpEmployeesVendes.ToList().Select(x => new EmployeeSales { Employee = x.Key, Sales = x.Value }).ToList();
+
+
+
+
+
             //Query 10: 
 
 
