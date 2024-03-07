@@ -22,6 +22,6 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         public string HtmlDescription { get; set; }
         public byte[] Image { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; }
+        public  ICollection<Product> Products { get; set; }
     }
 }

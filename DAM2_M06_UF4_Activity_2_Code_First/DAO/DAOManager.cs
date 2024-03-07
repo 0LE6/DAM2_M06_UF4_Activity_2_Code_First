@@ -422,6 +422,10 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
         {
             return dbContext.Employees.ToList();
         }
+        public List<ProductLine> GetProductLines()
+        {
+            return dbContext.ProductLines.ToList();
+        }
         public List<Employee> GetEmployeesByOfficeCode(string code)
         {
             return dbContext.Employees.Where(x => x.OfficeCode == code).ToList();

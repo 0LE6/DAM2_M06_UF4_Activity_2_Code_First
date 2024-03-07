@@ -90,6 +90,33 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
+
+            <TabItem Header="Product Lines">
+                <DataGrid x:Name="dgProductLines" ItemsSource="{Binding ProductLines}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Product Line Code" Binding="{Binding ProductLineCode}" />
+                        <DataGridTextColumn Header="Text Description" Binding="{Binding TextDescription}" Width="200" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem  Header="Products Ordered By Product Line">
+                <DataGrid x:Name="dgProductesPerProductLine" ItemsSource="{Binding Products}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Product Code" Binding="{Binding ProductCode}" />
+                        <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="200" />
+                        <DataGridTextColumn Header="Product Line" Binding="{Binding ProductLine}" />
+                        <DataGridTextColumn Header="Product Scale" Binding="{Binding ProductScale}" />
+                        <DataGridTextColumn Header="Product Vendor" Binding="{Binding ProductVendor}" />
+                        <DataGridTextColumn Header="Quantity In Stock" Binding="{Binding QuantityInStock}" />
+                        <DataGridTextColumn Header="Buy Price" Binding="{Binding BuyPrice}" />
+                        <DataGridTextColumn Header="MSRP" Binding="{Binding MSRP}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+
         </TabControl>
+        
     </Grid>
 </Window>
