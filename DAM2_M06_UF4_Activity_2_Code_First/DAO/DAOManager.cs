@@ -1,6 +1,7 @@
 ﻿using CsvHelper;
 using DAM2_M06_UF4_Activity_2_Code_First.MODEL;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Formats.Asn1;
@@ -395,6 +396,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
         #endregion
 
         #region LAS 12 QUERIES DE HERCULES
+        //primera mitad
         public void Query1MostrarEmpleadosYSusOficinas()
         {
             var employeesAndOffices = dbContext.Employees
@@ -409,6 +411,98 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
                                  .ToList();
             // test
             foreach (var i in employeesAndOffices) { Console.WriteLine(i); }
+        }
+
+        //segunda mitad
+
+        public List<Employee> GetEmployees()
+        {
+            return dbContext.Employees.ToList();
+        }
+        public List<Employee> GetEmployeesByOfficeCode(string code)
+        {
+            return dbContext.Employees.Where(x => x.OfficeCode == code).ToList();
+        }
+        public List<Employee> GetEmployeesOrderedByOffice()
+        {
+            return dbContext.Employees.OrderBy(x => x.OfficeCode).ToList();
+
+        }
+
+        public List<Product> GetProductsOrderedByPrice()
+        {
+            return dbContext.Products.OrderBy(x => x.BuyPrice).ToList();
+
+        }
+
+        public List<Product> GetProductsOrdredByProfitMargin()
+        {
+            return dbContext.Products.OrderByDescending(o => o.MSRP - o.BuyPrice).ToList();
+        }
+
+        public string GetOfficeCityFromEmployeeCode(int empCode)
+        {
+            var city = dbContext.Employees
+                    .Join(dbContext.Offices,
+                    e => e.OfficeCode,
+                    o => o.OfficeCode,
+                    (e, o) => new { e.EmployeeNumber, o.City })
+                    .Where(x => x.EmployeeNumber == empCode)
+                    .Select(x => x.City)
+                    .FirstOrDefault();
+
+            return city;
+        }
+
+        public decimal SalesAmountByEmpCode(int empCode)
+        {
+            var totalAmount = dbContext.Payments
+                .Join(dbContext.Customers,
+                p => p.CustomerNumber,
+                c => c.CustomerNumber,
+                (p, c) => new {p.Amount, c.SalesRepEmployeeNumber})
+                .Where(x => x.SalesRepEmployeeNumber == empCode)
+                .Sum(x => x.Amount);
+
+            return totalAmount;
+
+        }
+
+        public decimal SalesByProduct(string productCode)
+        {
+            var totalSalesPerProduct = dbContext.OrderDetails
+                .Where(od => od.ProductCode == productCode)
+                .GroupBy(od => od.ProductCode)
+                .Select(group => new
+                {
+                    ProductCode = group.Key,
+                    TotalSales = group.Sum(od => od.QuantityOrdered * od.PriceEach)
+                })
+                .FirstOrDefault()?.TotalSales ?? 0;
+
+            return totalSalesPerProduct;
+        }
+
+        public List<Product> GetAllProducts()
+        {
+            return dbContext.Products.ToList();
+        }
+
+        //Intent raro:
+
+        public object SalesByProduct2(string productCode)
+        {
+            var totalSalesPerProduct = dbContext.OrderDetails
+            .Where(od => od.ProductCode == productCode)
+            .GroupBy(od => od.ProductCode)
+            .Select(group => new
+            {
+                ProductCode = group.Key,
+                TotalSales = group.Sum(od => od.QuantityOrdered * od.PriceEach)
+            })
+            .FirstOrDefault();
+
+            return totalSalesPerProduct;
         }
 
         #endregion
