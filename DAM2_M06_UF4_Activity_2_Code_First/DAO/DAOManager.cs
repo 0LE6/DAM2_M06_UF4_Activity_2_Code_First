@@ -567,14 +567,34 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
             return mostSoldProductsByOffice;
         }
 
-
+        /*  lista de clientes junto al total de sus pagos, 
+         *  filtrando por aquellos clientes que hayan realizado pagos por encima de un cierto umbral 
+         *  y ordenando los resultados por el nombre del cliente.*/
+        public List<CustomerPaymentInfo> GetCustomersWithTotalPaymentsAbove(decimal minimumPayment)
+        {
+            return dbContext.Customers
+                .Where(c => c.Payments.Sum(p => p.Amount) > minimumPayment) 
+                .OrderBy(c => c.CustomerName) 
+                .Select(c => new CustomerPaymentInfo 
+                {
+                    CustomerNumber = c.CustomerNumber,
+                    CustomerName = c.CustomerName,
+                    TotalPayments = c.Payments.Sum(p => p.Amount) 
+                })
+                .ToList(); 
+        }
         #endregion
 
 
     }
 
     // Auxilar code
-
+    public class CustomerPaymentInfo
+    {
+        public int CustomerNumber { get; set; }
+        public string CustomerName { get; set; }
+        public decimal TotalPayments { get; set; }
+    }
     public class MostSoldProductByOffice
     {
         public string OfficeCode { get; set; }
