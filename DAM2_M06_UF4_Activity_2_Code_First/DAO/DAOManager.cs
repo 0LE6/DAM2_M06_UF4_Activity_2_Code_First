@@ -493,6 +493,10 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
             return dbContext.Products.ToList();
         }
 
+        public List<Payment> GetPaymentsByCustomerNumber(int customerNumber)
+        {
+            return dbContext.Payments.Where(x => x.CustomerNumber == customerNumber).ToList();
+        }
         //Intent raro:
 
         public object SalesByProduct2(string productCode)

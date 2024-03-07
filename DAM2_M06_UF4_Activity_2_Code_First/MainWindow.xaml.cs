@@ -150,6 +150,19 @@ namespace DAM2_M06_UF4_Activity_2_Code_First
 
             dgProductesPerProductLine.ItemsSource = productesOrdenatsPerProductLines;
 
+            //Query 9: Employees que més han venut però a través de Navigation
+            Dictionary<Employee, decimal> kvpEmployeesVendes = new Dictionary<Employee, decimal>();
+            foreach (Employee e in employees)
+            {
+                decimal sumaVentes = 0;
+                foreach (Customer c in e.Customers)
+                {
+                   
+                }
+            }
+            
+            //Query 10: 
+
 
 
 

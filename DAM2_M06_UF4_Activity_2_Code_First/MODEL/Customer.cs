@@ -44,9 +44,9 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         [Column(TypeName = "decimal(10, 2)")]
         public decimal CreditLimit { get; set; }
 
-        public virtual Employee SalesRep { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
-        public virtual ICollection<Payment> Payments { get; set; }
+        public  Employee SalesRep { get; set; }
+        public  ICollection<Order> Orders { get; set; }
+        public  ICollection<Payment> Payments { get; set; }
 
     }
 }
