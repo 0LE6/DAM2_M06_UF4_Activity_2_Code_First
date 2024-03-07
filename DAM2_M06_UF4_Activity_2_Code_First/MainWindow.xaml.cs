@@ -175,7 +175,10 @@ namespace DAM2_M06_UF4_Activity_2_Code_First
             //Query 10: 
 
 
+            //Query 11:
 
+            List<CustomerPaymentInfo> cpi = manager.GetCustomersWithTotalPaymentsAbove((decimal)100.0);
+            dgCustomersWithTotalPaymentsAbove.ItemsSource = cpi;
 
 
 

@@ -117,8 +117,19 @@
                 </DataGrid>
             </TabItem>
 
+            <!-- mi zona -->
 
+            <TabItem  Header="Customers With Total Payments Above a Quantity">
+                <DataGrid x:Name="dgCustomersWithTotalPaymentsAbove" ItemsSource="{Binding CustomerPaymentInfo}" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Customer Number" Binding="{Binding CustomerNumber}" />
+                        <DataGridTextColumn Header="Customer Name" Binding="{Binding CustomerName}" Width="200" />
+                        <DataGridTextColumn Header="Total Payments" Binding="{Binding TotalPayments}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <!-- fin de mi zona-->
         </TabControl>
-        
+
     </Grid>
 </Window>

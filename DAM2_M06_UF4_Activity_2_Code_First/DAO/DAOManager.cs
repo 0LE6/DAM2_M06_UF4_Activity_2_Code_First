@@ -568,21 +568,24 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
         }
 
         /*  lista de clientes junto al total de sus pagos, 
-         *  filtrando por aquellos clientes que hayan realizado pagos por encima de un cierto umbral 
-         *  y ordenando los resultados por el nombre del cliente.*/
+ 
+filtrando por aquellos clientes que hayan realizado pagos por encima de un cierto umbral 
+y ordenando los resultados por el nombre del cliente.*/
         public List<CustomerPaymentInfo> GetCustomersWithTotalPaymentsAbove(decimal minimumPayment)
         {
             return dbContext.Customers
-                .Where(c => c.Payments.Sum(p => p.Amount) > minimumPayment) 
-                .OrderBy(c => c.CustomerName) 
-                .Select(c => new CustomerPaymentInfo 
+                .Where(c => c.Payments.Sum(p => p.Amount) > minimumPayment)
+                .Select(c => new CustomerPaymentInfo
                 {
                     CustomerNumber = c.CustomerNumber,
                     CustomerName = c.CustomerName,
-                    TotalPayments = c.Payments.Sum(p => p.Amount) 
+                    TotalPayments = c.Payments.Sum(p => p.Amount)
                 })
-                .ToList(); 
+                .Where(cpi => cpi.TotalPayments > minimumPayment)
+                .OrderByDescending(cpi => cpi.TotalPayments)
+                .ToList();
         }
+
         #endregion
 
 
@@ -618,6 +621,8 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
         public Employee Employee { get; set; }
         public decimal Sales { get; set; }
     }
+
+
 
 
 }
