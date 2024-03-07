@@ -515,37 +515,51 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
 
         public List<MostSoldProductByOffice> GetMostSoldProductsByOffice()
         {
-            var mostSoldProductsByOffice = dbContext.OrderDetails
-                .Include(od => od.Order)
-                    .ThenInclude(o => o.Customer)
-                        .ThenInclude(c => c.SalesRep)
-                            .ThenInclude(e => e.Office)
+            // obtenemos todos los datos necesarios de la base de datos
+            var salesData = dbContext.OrderDetails
+                .Include(od => od.Order).ThenInclude(o => o.Customer).ThenInclude(c => c.SalesRep).ThenInclude(e => e.Office)
                 .Include(od => od.Product)
-                .GroupBy(od => new { od.Product.ProductName, od.Order.Customer.SalesRep.OfficeCode })
-                .Select(group => new
+                .Select(od => new
                 {
-                    OfficeCode = group.Key.OfficeCode,
-                    ProductName = group.Key.ProductName,
-                    TotalQuantity = group.Sum(g => g.QuantityOrdered),
-                    TotalSales = group.Sum(g => g.QuantityOrdered * g.PriceEach)
+                    OfficeCode = od.Order.Customer.SalesRep.Office.OfficeCode,
+                    OfficeName = od.Order.Customer.SalesRep.Office.City, // Asumiendo que el nombre es la ciudad
+                    OfficeCountry = od.Order.Customer.SalesRep.Office.Country,
+                    ProductName = od.Product.ProductName,
+                    od.QuantityOrdered,
+                    TotalSales = od.QuantityOrdered * od.PriceEach
                 })
-                .OrderByDescending(g => g.OfficeCode).ThenByDescending(g => g.TotalSales)
-                .GroupBy(g => g.OfficeCode)
-                .Select(g => g.FirstOrDefault())
-                .ToList();
+                .AsEnumerable(); // traemos los datos a la memoria para procesar la siguiente parte
 
-            var formattedResults = mostSoldProductsByOffice
+            // realizamos la agrupación y selección del producto más vendido por oficina en memoria
+            var mostSoldProductsByOffice = salesData
+                .GroupBy(sd => new { sd.OfficeCode, sd.ProductName })
+                .Select(g => new
+                {
+                    g.Key.OfficeCode,
+                    OfficeName = g.First().OfficeName, // usamos First() para obtener el nombre y país
+                    OfficeCountry = g.First().OfficeCountry,
+                    g.Key.ProductName,
+                    TotalQuantity = g.Sum(x => x.QuantityOrdered),
+                    TotalSales = g.Sum(x => x.TotalSales)
+                })
+                .GroupBy(x => x.OfficeCode)
+                .Select(g => g.OrderByDescending(x => x.TotalSales).FirstOrDefault())
+                .Where(x => x != null)
                 .Select(x => new MostSoldProductByOffice
                 {
                     OfficeCode = x.OfficeCode,
+                    OfficeName = x.OfficeName,
+                    OfficeCountry = x.OfficeCountry,
                     ProductName = x.ProductName,
                     TotalQuantity = x.TotalQuantity,
                     TotalSales = x.TotalSales
                 })
                 .ToList();
 
-            return formattedResults;
+            return mostSoldProductsByOffice;
         }
+
+
         #endregion
 
 
@@ -556,10 +570,13 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
     public class MostSoldProductByOffice
     {
         public string OfficeCode { get; set; }
+        public string OfficeName { get; set; } 
+        public string OfficeCountry { get; set; } 
         public string ProductName { get; set; }
         public int TotalQuantity { get; set; }
         public decimal TotalSales { get; set; }
     }
+
     public class EmployeeOfficeInfo
     {
         public int EmployeeNumber { get; set; }
