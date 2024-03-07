@@ -33,10 +33,10 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         public string OfficeCode { get; set; }
         [StringLength(50)]
         public string JobTitle { get; set; } 
-        public virtual Office Office { get; set; }
+        public  Office Office { get; set; }
 
-        public virtual Employee Manager { get; set; }
-        public virtual ICollection<Customer> Customers { get; set; }
-        public virtual ICollection<Employee> Subordinates { get; set; }
+        public  Employee Manager { get; set; }
+        public  ICollection<Customer> Customers { get; set; }
+        public  ICollection<Employee> Subordinates { get; set; }
     }
 }
