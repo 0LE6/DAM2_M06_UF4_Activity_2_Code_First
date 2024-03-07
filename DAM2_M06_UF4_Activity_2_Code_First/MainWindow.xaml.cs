@@ -131,8 +131,8 @@ namespace DAM2_M06_UF4_Activity_2_Code_First
             dgEmployeeOffices.ItemsSource = employeeOfficeInfos;
 
             //Query 6: Most sold products by office
-            //List<MostSoldProductByOffice> mostSoldProductByOffices = manager.GetMostSoldProductsByOffice();
-            //dgMostSoldProducts.ItemsSource = mostSoldProductByOffices;
+            List<MostSoldProductByOffice> mostSoldProductByOffices = manager.GetMostSoldProductsByOffice();
+            dgMostSoldProducts.ItemsSource = mostSoldProductByOffices;
 
             //Query 7: Product Lines
             List<ProductLine> productLines = manager.GetProductLines();

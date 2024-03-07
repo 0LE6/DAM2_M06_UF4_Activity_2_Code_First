@@ -85,7 +85,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Office Code" Binding="{Binding OfficeCode}" />
                         <DataGridTextColumn Header="Office Name" Binding="{Binding OfficeName}" />
-                        <DataGridTextColumn Header="Office Country Name" Binding="{Binding OfficeCountry}" />
+                        <DataGridTextColumn Header="Office Country" Binding="{Binding OfficeCountry}" />
                         <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" />
                         <DataGridTextColumn Header="Total Quantity" Binding="{Binding TotalQuantity}" />
                         <DataGridTextColumn Header="Total Sales" Binding="{Binding TotalSales}" />

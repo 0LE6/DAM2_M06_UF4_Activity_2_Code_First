@@ -556,7 +556,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
                     OfficeCountry = x.OfficeCountry,
                     ProductName = x.ProductName,
                     TotalQuantity = x.TotalQuantity,
-                    TotalSales = x.TotalSales
+                    TotalSales = Math.Round(x.TotalSales, 2)
                 })
                 .ToList();
 
