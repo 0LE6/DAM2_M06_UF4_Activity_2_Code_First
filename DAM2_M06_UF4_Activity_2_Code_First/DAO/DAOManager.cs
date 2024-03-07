@@ -463,9 +463,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
                 (p, c) => new {p.Amount, c.SalesRepEmployeeNumber})
                 .Where(x => x.SalesRepEmployeeNumber == empCode)
                 .Sum(x => x.Amount);
-
             return totalAmount;
-
         }
 
         public decimal SalesByProduct(string productCode)

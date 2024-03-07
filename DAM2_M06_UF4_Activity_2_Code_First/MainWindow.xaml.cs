@@ -27,6 +27,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First
 
             //manager.LoadDatabase();
 
+            #region Testing Queries
             Console.WriteLine("Hola, edu! :D");
 
             //manager.Query1MostrarEmpleadosYSusOficinas();
@@ -105,7 +106,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First
                 Console.WriteLine($"Product: {p.ProductCode} '{p.ProductName}': {guanys} ");
             }
 
-
+            #endregion
 
 
 
