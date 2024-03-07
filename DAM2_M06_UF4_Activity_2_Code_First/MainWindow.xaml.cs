@@ -126,6 +126,17 @@ namespace DAM2_M06_UF4_Activity_2_Code_First
             List<Product> productsByMargin = manager.GetProductsOrdredByProfitMargin();
             dgProducts.ItemsSource = productsByMargin;
 
+            //Query5: Combo Employee + Info de la seva oficina
+            List<EmployeeOfficeInfo> employeeOfficeInfos = manager.Query1MostrarEmpleadosYSusOficinas();
+            dgEmployeeOffices.ItemsSource = employeeOfficeInfos;
+
+            //Query 6: Most sold products by office
+            List<MostSoldProductByOffice> mostSoldProductByOffices = manager.GetMostSoldProductsByOffice();
+            dgMostSoldProducts.ItemsSource = mostSoldProductByOffices;
+
+
+
+
 
 
         }

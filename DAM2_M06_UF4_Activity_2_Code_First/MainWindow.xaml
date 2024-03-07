@@ -69,6 +69,27 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
+            <TabItem Header="Employee Offices">
+                <DataGrid x:Name="dgEmployeeOffices" ItemsSource="{Binding EmployeeOffices}" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Employee Number" Binding="{Binding EmployeeNumber}" />
+                        <DataGridTextColumn Header="Employee Name" Binding="{Binding EmployeeName}" />
+                        <DataGridTextColumn Header="City" Binding="{Binding OfficeCity}" />
+                        <DataGridTextColumn Header="Country" Binding="{Binding OfficeCountry}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem Header="Most Sold Products per Office">
+                <DataGrid x:Name="dgMostSoldProducts" ItemsSource="{Binding MostSoldProducts}" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Office Code" Binding="{Binding OfficeCode}" />
+                        <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" />
+                        <DataGridTextColumn Header="Total Quantity" Binding="{Binding TotalQuantity}" />
+                        <DataGridTextColumn Header="Total Sales" Binding="{Binding TotalSales}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
