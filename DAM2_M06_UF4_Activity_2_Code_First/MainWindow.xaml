@@ -7,6 +7,68 @@
         mc:Ignorable="d"
         Title="Activity 2" Height="450" Width="800">
     <Grid>
-        <TextBlock>Hello, Ferran! We are working on it! :D</TextBlock>
+        <TabControl>
+            <TabItem Header="Employees">
+                <DataGrid x:Name="dgEmployees" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Employee Number" Binding="{Binding EmployeeNumber}" />
+                        <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" />
+                        <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" />
+                        <DataGridTextColumn Header="Extension" Binding="{Binding Extension}" />
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                        <DataGridTextColumn Header="Reports To" Binding="{Binding ReportsTo}" />
+                        <DataGridTextColumn Header="Office Code" Binding="{Binding OfficeCode}" />
+                        <DataGridTextColumn Header="Job Title" Binding="{Binding JobTitle}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <!-- Query 2 -->
+            <TabItem Header="Oficines">
+                <DataGrid x:Name="dgOficines" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Office Code" Binding="{Binding OfficeCode}" />
+                        <DataGridTextColumn Header="City" Binding="{Binding City}" />
+                        <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" />
+                        <DataGridTextColumn Header="Address Line 1" Binding="{Binding AddressLine1}" />
+                        <DataGridTextColumn Header="Address Line 2" Binding="{Binding AddressLine2}" />
+                        <DataGridTextColumn Header="State" Binding="{Binding State}" />
+                        <DataGridTextColumn Header="Country" Binding="{Binding Country}" />
+                        <DataGridTextColumn Header="Postal Code" Binding="{Binding PostalCode}" />
+                        <DataGridTextColumn Header="Territory" Binding="{Binding Territory}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <!-- Añade más pestañas según sea necesario -->
+            <!-- ... -->
+            <TabItem Header="Employees In Office 1">
+                <DataGrid x:Name="dgEmployeesByOffice" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Employee Number" Binding="{Binding EmployeeNumber}" />
+                        <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" />
+                        <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" />
+                        <DataGridTextColumn Header="Extension" Binding="{Binding Extension}" />
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                        <DataGridTextColumn Header="Reports To" Binding="{Binding ReportsTo}" />
+                        <DataGridTextColumn Header="Office Code" Binding="{Binding OfficeCode}" />
+                        <DataGridTextColumn Header="Job Title" Binding="{Binding JobTitle}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem  Header="Products Ordered By Price">
+                <DataGrid x:Name="dgProducts" ItemsSource="{Binding Products}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Product Code" Binding="{Binding ProductCode}" />
+                        <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="200" />
+                        <DataGridTextColumn Header="Product Line" Binding="{Binding ProductLine}" />
+                        <DataGridTextColumn Header="Product Scale" Binding="{Binding ProductScale}" />
+                        <DataGridTextColumn Header="Product Vendor" Binding="{Binding ProductVendor}" />
+                        <DataGridTextColumn Header="Quantity In Stock" Binding="{Binding QuantityInStock}" />
+                        <DataGridTextColumn Header="Buy Price" Binding="{Binding BuyPrice}" />
+                        <DataGridTextColumn Header="MSRP" Binding="{Binding MSRP}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

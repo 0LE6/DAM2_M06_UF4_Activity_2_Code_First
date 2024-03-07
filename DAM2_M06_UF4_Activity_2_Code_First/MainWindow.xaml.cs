@@ -108,8 +108,23 @@ namespace DAM2_M06_UF4_Activity_2_Code_First
 
             #endregion
 
+            //Alguna query per la interfície gràfica:
 
+            //Query: Employees
+            List<Employee> employees = manager.GetEmployees();
+            dgEmployees.ItemsSource = employees;
 
+            //Query2: Offices ordered
+            List<Office> offices = manager.GetOffices();
+            dgOficines.ItemsSource = offices;
+
+            //Query3: Employees de la oficina 1
+            List<Employee> employeesOffice1 = manager.GetEmployeesByOfficeCode("1");
+            dgEmployeesByOffice.ItemsSource = employeesOffice1;
+
+            //Query4: Products by margin
+            List<Product> productsByMargin = manager.GetProductsOrdredByProfitMargin();
+            dgProducts.ItemsSource = productsByMargin;
 
 
 
