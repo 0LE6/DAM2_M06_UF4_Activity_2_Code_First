@@ -503,6 +503,15 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
             return totalSalesPerProduct;
         }
 
+        public List<Office> GetOffices()
+        {
+            return dbContext.Offices
+                            .OrderByDescending(o => o.OfficeCode)
+                            .ToList();
+        }
+
         #endregion
+
+
     }
 }
