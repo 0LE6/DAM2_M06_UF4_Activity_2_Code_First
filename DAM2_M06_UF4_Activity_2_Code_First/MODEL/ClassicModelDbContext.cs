@@ -34,41 +34,50 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.MODEL
         {
             // empleamos el API fluent para configurar ciertos aspectos del método
 
+            // configuracion 1-N entre product y productLine
+            // La regla OnDelete(DeleteBehavior.Restrict) evita que se borre la línea de producto si se borra un producto.
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.ProductLineDetails)
                 .WithMany(pl => pl.Products)
                 .HasForeignKey(p => p.ProductLine)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // config de la clave compuesta de orderNumber + productCode en la tabla OrderDetails
             modelBuilder.Entity<OrderDetail>()
                .HasKey(od => new { od.OrderNumber, od.ProductCode });
 
-            // Configurar la relación entre Orders y Customers correctamente
+            // configuracion 1-N entre customer y order
+            // La regla OnDelete(DeleteBehavior.Cascade) indica que si se borra un cliente -> sus orders tb se borran
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.Customer)
                 .WithMany(c => c.Orders)
                 .HasForeignKey(o => o.CustomerNumber)
-                .OnDelete(DeleteBehavior.Cascade); // o .Restrict dependiendo de las reglas de negocio
+                .OnDelete(DeleteBehavior.Cascade);
 
+            // configuracion 1-N entre employee y customer 
+            // OnDelete(DeleteBehavior.Restrict) evita borrar el empleado si se elimina un cliente.
             modelBuilder.Entity<Customer>()
                 .HasOne(c => c.SalesRep)
                 .WithMany(e => e.Customers)
                 .HasForeignKey(c => c.SalesRepEmployeeNumber)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // config de la relacion jerarquica entre subordinados y manager
+            // ReportsTo es la clave primaria del manager al que reporta un empleado
             modelBuilder.Entity<Employee>()
                 .HasMany(e => e.Subordinates)
                 .WithOne(s => s.Manager)
                 .HasForeignKey(s => s.ReportsTo)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Asegurarse de que el campo OfficeCode en Employees esté mapeado correctamente
+            // configuracion 1-N entre office y employee
             modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Office)
                 .WithMany(o => o.Employees)
                 .HasForeignKey(e => e.OfficeCode)
-                .OnDelete(DeleteBehavior.Cascade); // o .Restrict dependiendo de las reglas de negocio
+                .OnDelete(DeleteBehavior.Cascade); // TODO : si se elimina ofi, tb lso empleados, cambiar a Restrict lol
 
+            // config de la clave compuesta de CustomerNumber + CheckNumber en la tabla Payments
             modelBuilder.Entity<Payment>()
                 .HasKey(p => new { p.CustomerNumber, p.CheckNumber });
         }

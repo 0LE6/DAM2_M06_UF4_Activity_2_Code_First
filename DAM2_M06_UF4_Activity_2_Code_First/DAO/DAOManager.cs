@@ -20,24 +20,24 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
         {
             dbContext = context;
         }
-        public void LoadDatabase() // Recordatorio que esto petará si no está vacía (duplicado de registros) 
-        {
-            try // D'aquesta manera si peta un .. no es fan els demés, però bueno. Caldria veure què es demana.
-            {
-                LoadProductLines();
-                LoadProducts();
-                LoadOffices();
-                LoadEmployees();
-                LoadCustomers();
-                LoadPayments();
-                LoadOrders();
-                LoadOrderDetails();
-            }
-            catch (Exception e)
-            {
+        //public void LoadDatabase() // Recordatorio que esto petará si no está vacía (duplicado de registros) 
+        //{
+        //    try // D'aquesta manera si peta un .. no es fan els demés, però bueno. Caldria veure què es demana.
+        //    {
+        //        LoadProductLines();
+        //        LoadProducts();
+        //        LoadOffices();
+        //        LoadEmployees();
+        //        LoadCustomers();
+        //        LoadPayments();
+        //        LoadOrders();
+        //        LoadOrderDetails();
+        //    }
+        //    catch (Exception e)
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
         #region LoadSpam
         private void LoadProductLines()
@@ -361,6 +361,23 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
         }
         #endregion
 
+        #region LAS 12 QUERIES DE HERCULES
+        public void Query1MostrarEmpleadosYSusOficinas()
+        {
+            var employeesAndOffices = dbContext.Employees
+                                 .Join(dbContext.Offices,
+                                       employee => employee.OfficeCode,
+                                       office => office.OfficeCode,
+                                       (employee, office) => new
+                                       {
+                                           EmployeeName = employee.FirstName + " " + employee.LastName,
+                                           OfficeCity = office.City
+                                       })
+                                 .ToList();
+            // test
+            foreach (var i in employeesAndOffices) { Console.WriteLine(i); }
+        }
 
+        #endregion
     }
 }
