@@ -25,7 +25,7 @@ namespace DAM2_M06_UF4_Activity_2_Code_First
             ClassicModelDbContext myContext = new ClassicModelDbContext();
             DAOManager manager = new DAOManager(myContext);
 
-            //manager.LoadDatabase();
+            manager.LoadDatabase();
 
             Console.WriteLine("Hola, edu! :D");
 

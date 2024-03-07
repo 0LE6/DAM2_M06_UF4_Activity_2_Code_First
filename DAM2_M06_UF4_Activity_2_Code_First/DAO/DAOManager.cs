@@ -20,24 +20,18 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
         {
             dbContext = context;
         }
-        //public void LoadDatabase() // Recordatorio que esto petará si no está vacía (duplicado de registros) 
-        //{
-        //    try // D'aquesta manera si peta un .. no es fan els demés, però bueno. Caldria veure què es demana.
-        //    {
-        //        LoadProductLines();
-        //        LoadProducts();
-        //        LoadOffices();
-        //        LoadEmployees();
-        //        LoadCustomers();
-        //        LoadPayments();
-        //        LoadOrders();
-        //        LoadOrderDetails();
-        //    }
-        //    catch (Exception e)
-        //    {
-
-        //    }
-        //}
+        public void LoadDatabase() 
+        {
+            LoadProductLines();
+            LoadProducts();
+            LoadOffices();
+            LoadEmployees();
+            LoadCustomers();
+            LoadPayments();
+            LoadOrders();
+            LoadOrderDetails();
+        
+        }
 
         #region LoadSpam
         private void LoadProductLines()
@@ -68,8 +62,12 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
         }
         private void AddProductLine(ProductLine p)
         {
-            dbContext.ProductLines.Add(p);
-            dbContext.SaveChanges();
+            var existingProductLine = dbContext.ProductLines.Find(p.ProductLineCode);
+            if (existingProductLine == null) 
+            {
+                dbContext.ProductLines.Add(p);
+                dbContext.SaveChanges();
+            }
         }
         private void LoadProducts() {
             // "productCode","productName","productLine","productScale","productVendor","productDescription","quantityInStock","buyPrice","MSRP"
@@ -111,8 +109,13 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
             }
         }
         private void AddProduct(Product p){
-            dbContext.Products.Add(p);
-            dbContext.SaveChanges();
+            var existingProduct = dbContext.Products.Find(p.ProductCode);
+            if (existingProduct == null)
+            {
+                dbContext.Products.Add(p);
+                dbContext.SaveChanges();
+            }
+
         }
 
         private void LoadOffices()
@@ -154,8 +157,13 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
         }
         private void AddOffice(Office o) 
         {
-            dbContext.Offices.Add(o);
-            dbContext.SaveChanges();
+            var existingOffice = dbContext.Offices.Find(o.OfficeCode);
+            if (existingOffice == null)
+            {
+                dbContext.Offices.Add(o);
+                dbContext.SaveChanges();
+            }
+
         }
 
         private void LoadEmployees()
@@ -198,8 +206,13 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
         }
         private void AddEmployee(Employee e)
         {
-            dbContext.Employees.Add(e);
-            dbContext.SaveChanges();
+            var employee = dbContext.Employees.Find(e.EmployeeNumber);
+            if (employee == null)
+            {
+                dbContext.Employees.Add(e);
+                dbContext.SaveChanges();
+            }
+
         }
         private void LoadCustomers()
         {
@@ -252,8 +265,13 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
         }
         private void AddCustomer(Customer c)
         {
-            dbContext.Customers.Add(c);
-            dbContext.SaveChanges();
+            var customer = dbContext.Customers.Find(c.CustomerNumber);
+            if (customer == null)
+            {
+                dbContext.Customers.Add(c);
+                dbContext.SaveChanges();
+            }
+
         }
         private void LoadPayments()
         {
@@ -282,8 +300,13 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
         }
         private void AddPayment(Payment p) 
         {
-            dbContext.Payments.Add(p);
-            dbContext.SaveChanges();
+            var payment = dbContext.Payments.Find(p.CustomerNumber, p.CheckNumber);
+            if (payment == null)
+            {
+                dbContext.Payments.Add(p);
+                dbContext.SaveChanges();
+            }
+
         }
 
         private void LoadOrders()
@@ -321,8 +344,13 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
         }
         private void AddOrder(Order o)
         {
-            dbContext.Orders.Add(o);
-            dbContext.SaveChanges();
+            var order = dbContext.Orders.Find(o.OrderNumber);
+            if (order == null)
+            {
+                dbContext.Orders.Add(o);
+                dbContext.SaveChanges();
+            }
+
         }
 
 
@@ -356,8 +384,13 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
 
         private void AddOrderDetail(OrderDetail od)
         {
-            dbContext.OrderDetails.Add(od);
-            dbContext.SaveChanges();
+            var orderDetail = dbContext.OrderDetails.Find(od.OrderNumber, od.ProductCode);
+            if (orderDetail == null)
+            {
+                dbContext.OrderDetails.Add(od);
+                dbContext.SaveChanges();
+            }
+
         }
         #endregion
 
