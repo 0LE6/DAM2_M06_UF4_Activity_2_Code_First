@@ -397,21 +397,24 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
 
         #region LAS 12 QUERIES DE HERCULES
         //primera mitad
-        public void Query1MostrarEmpleadosYSusOficinas()
+        public List<EmployeeOfficeInfo> Query1MostrarEmpleadosYSusOficinas()
         {
             var employeesAndOffices = dbContext.Employees
-                                 .Join(dbContext.Offices,
-                                       employee => employee.OfficeCode,
-                                       office => office.OfficeCode,
-                                       (employee, office) => new
-                                       {
-                                           EmployeeName = employee.FirstName + " " + employee.LastName,
-                                           OfficeCity = office.City
-                                       })
-                                 .ToList();
-            // test
-            foreach (var i in employeesAndOffices) { Console.WriteLine(i); }
+                .Join(dbContext.Offices,
+                      employee => employee.OfficeCode,
+                      office => office.OfficeCode,
+                      (employee, office) => new EmployeeOfficeInfo
+                      {
+                          EmployeeNumber = employee.EmployeeNumber,
+                          EmployeeName = employee.FirstName + " " + employee.LastName,
+                          OfficeCity = office.City,
+                          OfficeCountry = office.Country
+                      })
+                .ToList();
+
+            return employeesAndOffices;
         }
+
 
         //segunda mitad
 
@@ -514,4 +517,15 @@ namespace DAM2_M06_UF4_Activity_2_Code_First.DAO
 
 
     }
+
+    // Auxilar code
+    public class EmployeeOfficeInfo
+    {
+        public int EmployeeNumber { get; set; }
+        public string EmployeeName { get; set; }
+        public string OfficeCity { get; set; }
+        public string OfficeCountry { get; set; }
+    }
+
+
 }
